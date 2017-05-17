@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Product App</title>
+</head>
+<body>
+
+    <!--<div>
+        <h2>All Products</h2>
+        <ul id="products" class="table table-striped" />
+    </div>-->
+
+    <div class="list-group">
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading text-primary">Product Lists</h4>
+        </div>
+        <ul id="products" class="list-group" />
+     </div>
+
+
+
+    <!--<div class="container">
+        <h2>Products</h2>
+        <p>List of All Products</p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Products</th>
+                </tr>
+            </thead>
+            <tbody id="products">
+                    
+                
+            </tbody>
+        </table>
+    </div>-->
+
+  
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/products';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        $("<li>", { text: formatItem(item) }).appendTo($('#products'));
+                        var c = document.getElementById("products").childNodes;
+                        c.class += "list-group-item";
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.Item_Name + ': $' + '' + item.Item_Price;
+        }
+
+        
+    </script>
+</body>
+</html>
